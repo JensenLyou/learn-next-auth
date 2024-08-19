@@ -5,7 +5,7 @@ export default function LoginBtn() {
   const { data: session } = useSession();
 
   const handleSignIn = async () => {
-    const data = await signIn();
+    const data = await signIn("twitter");
     console.log("data", data);
   };
 

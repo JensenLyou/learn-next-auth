@@ -1,10 +1,10 @@
-import NextAuth from "next-auth";
 import Twitter from "next-auth/providers/twitter";
+import NextAuth from "next-auth";
 
 const providers = [
   Twitter({
-    clientId: process.env.TWITTER_ID || "",
-    clientSecret: process.env.TWITTER_SECRET || "",
+    clientId: process.env.TWITTER_ID!,
+    clientSecret: process.env.TWITTER_SECRET!,
     version: "2.0",
     httpOptions: {
       timeout: 10000,
