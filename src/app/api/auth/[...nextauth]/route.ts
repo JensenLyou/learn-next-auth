@@ -79,7 +79,7 @@ const handler = NextAuth({
       console.log("signInProfile", profile);
       console.log("signInEmail", email);
       console.log("signInCredentials", credentials);
-      return !!{ user, account, profile, email, credentials };
+      return !!{ ...user, account, profile, email, credentials };
     },
     async jwt({ token, user, account, profile }) {
       console.log("JWT:", { token, user, account, profile });
@@ -98,9 +98,9 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }: { session: any; token: any }) {
-      session.token = token;
+      let newSession = { ...session, ...token };
 
-      console.log("session:", session);
+      console.log("session:", newSession);
 
       // const user = await prisma.user.create({
       //   data: {
@@ -113,7 +113,7 @@ const handler = NextAuth({
       // });
       // console.log(user);
 
-      return session;
+      return newSession;
     },
   },
 });
