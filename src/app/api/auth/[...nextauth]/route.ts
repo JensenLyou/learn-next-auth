@@ -3,6 +3,9 @@ import NextAuth from "next-auth";
 import { SiweMessage } from "siwe";
 import { getCsrfToken } from "next-auth/react";
 import Credentials from "next-auth/providers/credentials";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const providers = [
   Twitter({
@@ -60,6 +63,16 @@ const handler = NextAuth({
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      const redirectUrl = url.startsWith("/")
+        ? new URL(url, baseUrl).toString()
+        : url;
+      console.log(
+        `[next-auth] Redirecting to "${redirectUrl}" (resolved from url "${url}" and baseUrl "${baseUrl}")`
+      );
+      console.log("redirectUrl:", redirectUrl);
+      return redirectUrl;
+    },
     async signIn({ user, account, profile, email, credentials }) {
       console.log("signInUser", user);
       console.log("signInAccount", account);
@@ -87,6 +100,17 @@ const handler = NextAuth({
       console.log("sessionSession:", session);
       console.log("SessionToken:", token);
       console.log("sessionProps:", props);
+      const user = await prisma.user.create({
+        data: {
+          name: "Jassen",
+          address: token.sub,
+          jti: token.jti,
+          createDate: new Date(token.iat),
+          expireDate: new Date(token.exp),
+        },
+      });
+      console.log(user);
+
       return session;
     },
   },

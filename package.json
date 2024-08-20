@@ -9,12 +9,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@prisma/client": "5.18.0",
     "@tanstack/query-core": "^5.51.24",
     "@tanstack/react-query": "^5.51.24",
     "@web3modal/wagmi": "^5.1.0",
     "ethers": "^6.13.2",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
+    "prisma": "^5.18.0",
     "react": "^18",
     "react-dom": "^18",
     "siwe": "^2.3.2",
