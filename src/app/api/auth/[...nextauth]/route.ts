@@ -96,20 +96,21 @@ const handler = NextAuth({
       }
       return token;
     },
-    async session({ session, token, ...props }: { session: any; token: any }) {
-      console.log("sessionSession:", session);
-      console.log("SessionToken:", token);
-      console.log("sessionProps:", props);
-      const user = await prisma.user.create({
-        data: {
-          name: "Jassen",
-          address: token.sub,
-          jti: token.jti,
-          createDate: new Date(token.iat),
-          expireDate: new Date(token.exp),
-        },
-      });
-      console.log(user);
+    async session({ session, token }: { session: any; token: any }) {
+      session.token = token;
+
+      console.log("session:", session);
+
+      // const user = await prisma.user.create({
+      //   data: {
+      //     name: "Jassen",
+      //     address: token.sub,
+      //     jti: token.jti,
+      //     createDate: new Date(token.iat),
+      //     expireDate: new Date(token.exp),
+      //   },
+      // });
+      // console.log(user);
 
       return session;
     },
