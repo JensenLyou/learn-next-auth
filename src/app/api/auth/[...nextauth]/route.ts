@@ -5,14 +5,14 @@ import { getCsrfToken } from "next-auth/react";
 import Credentials from "next-auth/providers/credentials";
 
 const providers = [
-  // Twitter({
-  //   clientId: process.env.TWITTER_ID!,
-  //   clientSecret: process.env.TWITTER_SECRET!,
-  //   version: "2.0",
-  //   httpOptions: {
-  //     timeout: 10000,
-  //   },
-  // }),
+  Twitter({
+    clientId: process.env.TWITTER_ID!,
+    clientSecret: process.env.TWITTER_SECRET!,
+    version: "2.0",
+    httpOptions: {
+      timeout: 10000,
+    },
+  }),
   Credentials({
     name: "Ethereum",
     credentials: {
