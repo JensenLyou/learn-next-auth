@@ -3,16 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev -p 3001",
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
+    "@tanstack/query-core": "^5.51.24",
+    "@tanstack/react-query": "^5.51.24",
+    "@web3modal/wagmi": "^5.1.0",
+    "ethers": "^6.13.2",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "siwe": "^2.3.2",
+    "viem": "2.x",
+    "wagmi": "^2.12.6"
   },
   "devDependencies": {
     "@types/node": "^20",
