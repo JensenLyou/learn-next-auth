@@ -99,10 +99,21 @@ const handler = NextAuth({
       console.log("jwtToken:", newToken);
       return newToken;
     },
-    async session({ session, token }: { session: any; token: any }) {
-      let newSession = { ...session, ...token };
+    async session({
+      session,
+      token,
+      user,
+    }: {
+      session: any;
+      token: any;
+      user: any;
+    }) {
+      console.log("sessionToken:", token);
+      console.log("sessionUser:", user);
 
-      console.log("session:", newSession);
+      let newSession = { ...session, token: token, user: user };
+
+      console.log("newSession:", newSession);
 
       // const user = await prisma.user.create({
       //   data: {
