@@ -83,19 +83,21 @@ const handler = NextAuth({
     },
     async jwt({ token, user, account, profile }) {
       console.log("JWT:", { token, user, account, profile });
+      let newToken = {};
       if (account) {
         if (account.provider === "twitter") {
           token.accessToken = "twitter:" + account.access_token;
           token.provider = account.provider;
           token.providerId = account.id;
-          token = { ...token, user, account, profile };
+          newToken = { ...token, user, account, profile };
         }
       } else {
         token.provider = "Ethereum";
+        newToken = { ...token };
       }
 
-      console.log("jwtToken:", token);
-      return token;
+      console.log("jwtToken:", newToken);
+      return newToken;
     },
     async session({ session, token }: { session: any; token: any }) {
       let newSession = { ...session, ...token };
