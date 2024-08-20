@@ -79,7 +79,7 @@ const handler = NextAuth({
       console.log("signInProfile", profile);
       console.log("signInEmail", email);
       console.log("signInCredentials", credentials);
-      return !!user;
+      return !!{ user, account, profile, email, credentials };
     },
     async jwt({ token, user, account, profile }) {
       console.log("JWT:", { token, user, account, profile });
@@ -88,12 +88,13 @@ const handler = NextAuth({
           token.accessToken = "twitter:" + account.access_token;
           token.provider = account.provider;
           token.providerId = account.id;
+          token = { ...token, user, account, profile };
         }
       } else {
         token.provider = "Ethereum";
-
-        console.log("EthereumJWT:", { token, user });
       }
+
+      console.log("jwtToken:", token);
       return token;
     },
     async session({ session, token }: { session: any; token: any }) {
