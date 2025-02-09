@@ -16,6 +16,8 @@ export default function Home() {
   console.log("session:", session);
   console.log("status:", status);
 
+  console.log("NODE_ENV:", process.env.NEXT_PUBLIC_VERCEL_ENV);
+
   const handleLogin = async () => {
     try {
       const callbackUrl = "/protected";

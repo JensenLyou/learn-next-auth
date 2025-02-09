@@ -126,7 +126,7 @@ const handler = NextAuth({
       // });
       // console.log(user);
 
-      return newSession;
+      return { ...newSession };
     },
   },
 });
