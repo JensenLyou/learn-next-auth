@@ -48,6 +48,8 @@ export default function Home() {
     <div>
       <LoginBtn />
 
+      <div>NODE_ENV: {process.env.NEXT_PUBLIC_VERCEL_ENV}</div>
+
       <div>
         <button
           onClick={() => {
